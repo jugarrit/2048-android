@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "1057544586930",
+    "project_id": "inner-topic-102920"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057544586930:android:bddb8639ee3645a1",
+        "android_client_info": {
+          "package_name": "com.uberspot.a2048"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTwuxDC2pRRPiDsiLmfnBobKnYfRNydY4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,6 +3,7 @@ package com.uberspot.a2048;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -25,6 +26,7 @@ import android.webkit.WebView;
 import android.widget.Toast;
 
 import de.cketti.library.changelog.ChangeLog;
+import io.smooch.ui.ConversationActivity;
 
 public class MainActivity extends Activity {
 
@@ -39,7 +41,7 @@ public class MainActivity extends Activity {
     private static final long mTouchThreshold = 2000;
     private Toast pressBackToast;
 
-    @SuppressLint({ "SetJavaScriptEnabled", "NewApi", "ShowToast" })
+    @SuppressLint({"SetJavaScriptEnabled", "NewApi", "ShowToast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +72,7 @@ public class MainActivity extends Activity {
                 & Configuration.SCREENLAYOUT_SIZE_MASK;
         if (((screenLayout == Configuration.SCREENLAYOUT_SIZE_LARGE)
                 || (screenLayout == Configuration.SCREENLAYOUT_SIZE_XLARGE))
-                    && isOrientationEnabled) {
+                && isOrientationEnabled) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         }
 
@@ -97,10 +99,11 @@ public class MainActivity extends Activity {
             mWebView.loadUrl("file:///android_asset/2048/index.html");
         }
 
-        Toast.makeText(getApplication(), R.string.toggle_fullscreen, Toast.LENGTH_SHORT).show();
-        // Set fullscreen toggle on webview LongClick
-        mWebView.setOnTouchListener(new OnTouchListener() {
+        Toast.makeText(getApplication(), R.string.toggle_smooch, Toast.LENGTH_SHORT).show();
 
+        final Context context = this;
+
+        mWebView.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 // Implement a long touch action by comparing
@@ -108,9 +111,7 @@ public class MainActivity extends Activity {
                 long currentTime = System.currentTimeMillis();
                 if ((event.getAction() == MotionEvent.ACTION_UP)
                         && (Math.abs(currentTime - mLastTouch) > mTouchThreshold)) {
-                    boolean toggledFullScreen = !isFullScreen();
-                    saveFullScreen(toggledFullScreen);
-                    applyFullScreen(toggledFullScreen);
+                    ConversationActivity.show(context);
                 } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     mLastTouch = currentTime;
                 }
@@ -150,6 +151,7 @@ public class MainActivity extends Activity {
 
     /**
      * Toggles the activitys fullscreen mode by setting the corresponding window flag
+     *
      * @param isFullScreen
      */
     private void applyFullScreen(boolean isFullScreen) {
